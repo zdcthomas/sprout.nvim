@@ -1,6 +1,5 @@
 # bonsai.nvim
 
-![The bonsai grows from a sprout to an old tree, then dies](assets/bonsai.gif)
 <p align="center">
     <img src="assets/bonsai.gif" alt="A gif of a bonsai growing from a sprout,
         to full, to dead"
