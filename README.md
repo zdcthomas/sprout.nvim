@@ -32,6 +32,9 @@ sprig now, but ready to grow strong while you sleep.
 It's a way to have an image grow over time in your dashboard. It handles picking
 an image from a list of any length based on what time it is.
 
+I wrote this description and the bonsai art and the original local version by
+hand. I packaged it all up using Claude so others could use it.
+
 ## Usage
 
 ```lua
