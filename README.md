@@ -1,9 +1,8 @@
-# bonsai.nvim
+# sprout.nvim
 ## Track your day, watch something live!
 
 <p align="center">
-    <img src="assets/bonsai.gif" alt="A gif of a bonsai growing from a sprout,
-        to full, to dead"
+    <img src="assets/bonsai.gif" alt="A gif of a bonsai growing from a sprout, to full, to dead">
 </p>
 
 It's 8:30 A.M. You're getting a head start on long day of writing TOML by hand.
@@ -33,11 +32,11 @@ sprig now, but ready to grow strong while you sleep.
 
 ```lua
 -- lazy.nvim
-{ dir = "~/dev/bonsai.nvim", name = "bonsai.nvim", lazy = true }
+{  "zdcthomas/sprout.nvim", lazy = true }
 ```
 
 ```lua
-local header = require("bonsai").pick({
+local header = require("sprout").pick({
 	hour = tonumber(vim.fn.strftime("%H")), -- default: current hour
 	set = "bonsai_boxed", -- default: the setup() set, "bonsai" out of the box
 	default = some_fallback_ascii, -- returned for a bad hour or unknown set
@@ -53,20 +52,20 @@ number of stages.
 Set a default set once:
 
 ```lua
-require("bonsai").setup({ set = "bonsai_boxed" })
+require("sprout").setup({ set = "bonsai_boxed" })
 ```
 
 Supply your own set with `register`. Stages are ordered youngest to
 oldest:
 
 ```lua
-require("bonsai").register("cactus", {
+require("sprout").register("cactus", {
 	stages = { seed_art, sprout_art, full_art },
 })
 
-local header = require("bonsai").pick({ set = "cactus" })
+local header = require("sprout").pick({ set = "cactus" })
 ```
 
 `pick` also accepts a set table directly: `pick({ set = { stages = {...} } })`.
-The raw art is available in the `require("bonsai").sets` registry, e.g.
+The raw art is available in the `require("sprout").sets` registry, e.g.
 `sets.bonsai.stages`.

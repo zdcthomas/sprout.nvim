@@ -1,12 +1,12 @@
--- bonsai.nvim: ascii art that grows with the hour of the day.
-local Bonsai = {}
+-- sprout.nvim: ascii art that grows with the hour of the day.
+local Sprout = {}
 
 -- Registry of art sets. A set is a table with a `stages` list of
 -- multiline strings, ordered youngest to oldest. Any stage count works;
 -- the 24 hours are split evenly across the stages.
-Bonsai.sets = {
-	bonsai = require("bonsai.sets.bonsai"),
-	bonsai_boxed = require("bonsai.sets.bonsai_boxed"),
+Sprout.sets = {
+	bonsai = require("sprout.sets.bonsai"),
+	bonsai_boxed = require("sprout.sets.bonsai_boxed"),
 }
 
 local config = {
@@ -15,18 +15,18 @@ local config = {
 
 -- Register a custom art set under a name, so pick() can use it.
 -- def: { stages = { "...", "..." } }, ordered youngest to oldest.
-Bonsai.register = function(name, def)
+Sprout.register = function(name, def)
 	assert(type(name) == "string" and name ~= "", "bonsai: a set name must be a non-empty string")
 	assert(
 		type(def) == "table" and type(def.stages) == "table" and #def.stages > 0,
 		"bonsai: a set needs a non-empty `stages` list"
 	)
-	Bonsai.sets[name] = def
+	Sprout.sets[name] = def
 end
 
 -- opts.set: the set name that pick() uses by default. The name resolves
 -- at pick() time, so setup() may run before register().
-Bonsai.setup = function(opts)
+Sprout.setup = function(opts)
 	opts = opts or {}
 	if opts.set ~= nil then
 		config.set = opts.set
@@ -37,7 +37,7 @@ local resolve_set = function(set)
 	if type(set) == "table" then
 		return set
 	end
-	return Bonsai.sets[set]
+	return Sprout.sets[set]
 end
 
 -- Pick the art stage that matches an hour of the day (0-23).
@@ -46,7 +46,7 @@ end
 --   the setup() set ("bonsai" out of the box).
 -- opts.boxed: shorthand for set = "bonsai_boxed" (kept for old configs).
 -- opts.default: the fallback ascii for a bad hour value or unknown set.
-Bonsai.pick = function(opts)
+Sprout.pick = function(opts)
 	opts = opts or {}
 	local hour = tonumber(opts.hour) or tonumber(vim.fn.strftime("%H"))
 	local set = resolve_set(opts.set or (opts.boxed and "bonsai_boxed") or config.set)
@@ -60,4 +60,4 @@ Bonsai.pick = function(opts)
 	return stages[index + 1] or opts.default
 end
 
-return Bonsai
+return Sprout

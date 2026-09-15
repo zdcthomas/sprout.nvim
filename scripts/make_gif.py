@@ -1,4 +1,4 @@
-"""Render the bonsai stages from lua/bonsai/sets/bonsai.lua into assets/bonsai.gif.
+"""Render the bonsai stages from lua/sprout/sets/bonsai.lua into assets/bonsai.gif.
 
 Each frame shows a mock start-screen dashboard: the tree as the header, a
 clock for the hour that stage covers, a small menu, and a footer.
@@ -10,10 +10,10 @@ from pathlib import Path
 
 from PIL import Image, ImageDraw, ImageFont
 
-# BONSAI_ROOT overrides the repo root. The nix package needs this, because
+# SPROUT_ROOT overrides the repo root. The nix package needs this, because
 # there the script runs from the store, not from scripts/.
-ROOT = Path(os.environ.get("BONSAI_ROOT") or Path(__file__).resolve().parent.parent)
-SOURCE = ROOT / "lua" / "bonsai" / "sets" / "bonsai.lua"
+ROOT = Path(os.environ.get("SPROUT_ROOT") or Path(__file__).resolve().parent.parent)
+SOURCE = ROOT / "lua" / "sprout" / "sets" / "bonsai.lua"
 OUT = ROOT / "assets" / "bonsai.gif"
 
 # Growth order, ending with the dead tree.
