@@ -28,6 +28,10 @@ meatloaf still there in the microwave, _waiting_. Your bonsai is reborn. Just a
 sprig now, but ready to grow strong while you sleep.
 
 
+## Yeah but what is it?
+It's a way to have an image grow over time in your dashboard. It handles picking
+an image from a list of any length based on what time it is.
+
 ## Usage
 
 ```lua
@@ -35,17 +39,16 @@ sprig now, but ready to grow strong while you sleep.
 {  "zdcthomas/sprout.nvim", lazy = true }
 ```
 
+Basic usage:
 ```lua
-local header = require("sprout").pick({
-	hour = tonumber(vim.fn.strftime("%H")), -- default: current hour
-	set = "bonsai_boxed", -- default: the setup() set, "bonsai" out of the box
-	default = some_fallback_ascii, -- returned for a bad hour or unknown set
-})
+local header = require("sprout").pick({})
 ```
 
-`pick` returns the stage for the hour as a multiline string. The 24 hours
-are split evenly across the stages of the set, so a set can have any
-number of stages.
+`pick` returns the stage for the time of day as a multiline string. The
+day is split evenly across the stages of the set, so a set can have any
+number of stages. Minutes and seconds count: a set with 48 stages moves
+to the next stage every 30 minutes. To pick for another time, pass a
+whole or fractional hour: `pick({ hour = 13.5 })` is 13:30.
 
 ## Art sets
 
