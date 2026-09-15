@@ -96,15 +96,25 @@ Consequences:
 - `make_gif.py` update: render each stage's loop a few times before
   advancing, so the gif shows the animation.
 
+### Decided
+
+- Animation pauses when Neovim loses focus. Stop the timer on
+  `FocusLost`, restart it on `FocusGained`. Frames derive from the
+  clock, so the loop lands on the correct frame after resume with no
+  catch-up logic.
+
 ### Open questions
 
-- [ ] Global default `frame_ms`, or per set, or per stage?
-- [ ] Should frame timing pause when Neovim loses focus? (battery)
+- [ ] Which scopes set the animation speed: a global `frame_ms`
+      default in `setup()`, a per-set value, a per-stage value, or
+      some stack of these with overrides?
 - [ ] Does `MiniStarter.refresh()` re-evaluate the header cheaply
       enough at 2-4 fps?
-- [ ] Is the `{ frames... }` nested-list format right, or should
-      animation live in a parallel `loops` field so `stages` stays
-      flat?
+- [ ] Data shape. Option A (current spec): a `stages` entry is a
+      string or a list of frames, mixed in one field. Option B: keep
+      `stages` as flat strings, and put frames in a separate `loops`
+      field beside it, keyed by stage index. A has one source of
+      truth; B keeps `stages` simple but the two fields can drift.
 
 ### Decision checklist before building
 
