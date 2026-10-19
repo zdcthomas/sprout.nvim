@@ -16,6 +16,8 @@
       ];
       forEachSystem = f: nixpkgs.lib.genAttrs systems (system: f nixpkgs.legacyPackages.${system});
       pythonFor = pkgs: pkgs.python3.withPackages (ps: [ ps.pillow ]);
+      # The font the gif renders with. SPROUT_FONT overrides it.
+      fontFor = pkgs: "${pkgs.iosevka-bin}/share/fonts/truetype/Iosevka-Regular.ttc";
     in
     {
       packages = forEachSystem (pkgs: rec {
@@ -26,6 +28,7 @@
           runtimeInputs = [ (pythonFor pkgs) ];
           text = ''
             export SPROUT_ROOT="''${SPROUT_ROOT:-$PWD}"
+            export SPROUT_FONT="''${SPROUT_FONT:-${fontFor pkgs}}"
             exec python3 ${./scripts/make_gif.py}
           '';
         };
@@ -35,6 +38,7 @@
       devShells = forEachSystem (pkgs: {
         default = pkgs.mkShell {
           packages = [ (pythonFor pkgs) ];
+          SPROUT_FONT = fontFor pkgs;
         };
       });
     };

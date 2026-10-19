@@ -114,3 +114,6 @@ make test
 ```
 
 The tests run in a clean Neovim and need nothing else installed.
+
+`nix run` renders `assets/bonsai.gif` from the art in `lua/sprout/sets/`
+with Iosevka. Set `SPROUT_FONT` to a font file path to use another font.
