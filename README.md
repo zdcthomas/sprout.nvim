@@ -1,5 +1,7 @@
 # sprout.nvim
-## Track your day, watch something live!
+
+Watch a tree grow in your editor. sprout.nvim gives your start screen an
+ASCII bonsai that grows with the hour of the day.
 
 <p align="center">
     <img src="assets/bonsai.gif" alt="A gif of a bonsai growing from a sprout, to full, to dead">
