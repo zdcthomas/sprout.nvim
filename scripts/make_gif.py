@@ -18,9 +18,8 @@ OUT = ROOT / "assets" / "bonsai.gif"
 
 # Growth order, ending with the dead tree.
 ORDER = ["smallest", "baby", "teen", "adult", "middle_aged", "old", "older"]
-# First hour of the window each stage covers (6 stages, 4 hours each).
-# The dead tree is a joke frame, so it gets the last minute of the day.
-HOURS = ["00:00", "04:00", "08:00", "12:00", "16:00", "20:00", "23:59"]
+# First minute of the window each stage covers (7 stages, 24/7 hours each).
+HOURS = ["00:00", "03:26", "06:52", "10:17", "13:43", "17:09", "20:35"]
 
 MENU = [
     "[e] New file",
