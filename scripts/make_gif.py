@@ -39,7 +39,31 @@ MENU_KEY = (140, 190, 100)
 MENU_TEXT = (150, 160, 180)
 FOOTER_TEXT = (100, 105, 125)
 
-FONT = ImageFont.truetype("/System/Library/Fonts/Menlo.ttc", 22)
+
+
+def load_font(size=22):
+    """Menlo on macOS; otherwise the first monospace font fontconfig knows."""
+    import shutil
+    import subprocess
+
+    override = os.environ.get("SPROUT_FONT")
+    candidates = [override] if override else []
+    candidates.append("/System/Library/Fonts/Menlo.ttc")
+    if shutil.which("fc-match"):
+        out = subprocess.run(
+            ["fc-match", "-f", "%{file}", "monospace"], capture_output=True, text=True
+        ).stdout.strip()
+        if out:
+            candidates.append(out)
+    for path in candidates:
+        try:
+            return ImageFont.truetype(path, size)
+        except OSError:
+            continue
+    raise SystemExit("make_gif: no monospace font found; set SPROUT_FONT to a .ttf path")
+
+
+FONT = load_font()
 
 FRAME_MS = 900
 LAST_FRAME_MS = 1800
